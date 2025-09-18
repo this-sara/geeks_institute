@@ -1,5 +1,4 @@
 # Exercise 4 : Afternoon at the Zoo
-
 # Instructions
 # Create a class called Zoo.
 class Zoo:
@@ -42,15 +41,12 @@ class Zoo:
 #     E: ['Eel', 'Emu']
 # }
 
-
-
 # Create a method called get_groups that prints the animal/animals inside each group.
     def get_groups(self):
         groups=self.sort_animals()
         for key,animals in groups.items():
             print(f"{key}: {animals}\n")
-
-
+            
 # Create an object called new_york_zoo and call all the methods.
 new_york_zoo=Zoo("New York Zoo")
 new_york_zoo.add_animal("Cat")
@@ -60,7 +56,6 @@ new_york_zoo.add_animal("Bear")
 new_york_zoo.add_animal("Ape")
 new_york_zoo.add_animal("Eel")
 new_york_zoo.add_animal("Emu")
-
 new_york_zoo.get_animals()
 print(new_york_zoo.sort_animals())
 new_york_zoo.get_groups()
