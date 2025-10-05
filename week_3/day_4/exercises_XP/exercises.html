@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chocolate Facts</title>
+  <style>
+    label,input {
+      display:block;
+    }  
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    /* Fade-out animation for the bonus */
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+
+    .fade {
+      animation: fadeOut 1s forwards;
+    }
+  </style>
+</head>
+<body>
+
+  <article>
+    <h1>Some Facts</h1>
+    <h2>The Chocolate</h2>
+    <h3>History of the chocolate</h3>
+    <p>Chocolate is made from tropical Theobroma cacao tree seeds. 
+      Its earliest use dates back to the Olmec civilization in Mesoamerica.</p>
+    <p>After the European discovery of the Americas, chocolate became 
+      very popular in the wider world, and its demand exploded.</p>
+    <p>Chocolate has since become a popular food product that millions enjoy every day, 
+      thanks to its unique, rich, and sweet taste.</p> 
+    <p>But what effect does eating chocolate have on our health?</p> 
+  </article>
+  <button id="bold-btn">Make Paragraphs Bold</button>
+
+  <form>
+        <label for="fname">First name:</label><br>
+        <input type="text" id="fname" name="firstname"><br>
+        <label for="lname">Last name:</label><br>
+        <input type="text" id="lname" name="lastname"><br><br>
+        <input type="submit" value="Submit" id="submit">
+  </form> 
+<ul class="usersAnswer"></ul>
+<p id="myParagraph">
+  <strong>Hello</strong> I hope you are enjoying <strong>this</strong> class. At the
+  <strong>end</strong> you <strong>will</strong> be great Developers!
+  <strong>Enjoy</strong> the <strong>JavaScript </strong> lessons
+</p>
+
+<p>Input radius value and get the volume of a sphere.</p> 
+        <form  id="MyForm"> 
+            <label for="radius">Radius</label><input type="text" name="radius" id="radius" required> 
+            <label for="volume">Volume</label><input type="text" name="volume" id="volume"> 
+            <input type="submit" value="Calculate" id="submit">    
+        </form> 
+
+  <script >
+    // exercise 1
+    // 1️⃣ Retrieve and log the h1
+const h1 = document.querySelector("h1");
+console.log(h1.textContent);
+
+// 2️⃣ Remove the last paragraph
+const article = document.querySelector("article");
+const lastParagraph = article.lastElementChild;
+article.removeChild(lastParagraph);
+
+// 3️⃣ Click on h2 → change background color to red
+const h2 = document.querySelector("h2");
+h2.addEventListener("click", () => {
+  h2.style.backgroundColor = "red";
+});
+
+// 4️⃣ Click on h3 → hide it
+const h3 = document.querySelector("h3");
+h3.addEventListener("click", () => {
+  h3.style.display = "none";
+});
+
+// 5️⃣ Button → make all paragraphs bold
+const button = document.getElementById("bold-btn");
+button.addEventListener("click", () => {
+  const paragraphs = document.querySelectorAll("p");
+  paragraphs.forEach(p => {
+    p.style.fontWeight = "bold";
+  });
+});
+
+// 🌟 BONUS 1: Hover on h1 → random font size between 0–100px
+h1.addEventListener("mouseover", () => {
+  const randomSize = Math.floor(Math.random() * 101); // 0–100
+  h1.style.fontSize = `${randomSize}px`;
+});
+
+// 🌟 BONUS 2: Hover on 2nd paragraph → fade out
+const secondParagraph = document.querySelectorAll("p")[1];
+secondParagraph.addEventListener("mouseover", () => {
+  secondParagraph.classList.add("fade");
+});
+
+
+    // exercise 2
+
+        // 1️⃣ Retrieve the form and log it
+const form = document.querySelector("form");
+console.log("Form:", form);
+
+// 2️⃣ Retrieve the inputs by their IDs
+const fnameInput = document.getElementById("fname");
+const lnameInput = document.getElementById("lname");
+console.log("By ID:", fnameInput, lnameInput);
+
+// 3️⃣ Retrieve the inputs by their name attribute
+const fnameByName = document.getElementsByName("firstname")[0];
+const lnameByName = document.getElementsByName("lastname")[0];
+console.log("By name:", fnameByName, lnameByName);
+
+// 4️⃣ Handle form submission
+form.addEventListener("submit", (event) => {
+  event.preventDefault(); 
+  //  prevents the page from reloading after submitting
+
+  const firstName = fnameInput.value.trim();
+  const lastName = lnameInput.value.trim();
+
+  // Check that inputs are not empty
+  if (firstName === "" || lastName === "") {
+    alert("Please fill in both fields.");
+    return;
+  }
+
+  // Select the <ul> element
+  const ul = document.querySelector(".usersAnswer");
+
+  // Clear any previous list
+  ul.innerHTML = "";
+
+  // Create <li> elements for both values
+  const li1 = document.createElement("li");
+  li1.textContent = firstName;
+
+  const li2 = document.createElement("li");
+  li2.textContent = lastName;
+
+  // Append them to the <ul>
+  ul.appendChild(li1);
+  ul.appendChild(li2);
+
+  // Optional: clear form fields
+  form.reset();
+});
+
+// exercise 3
+// 1️⃣ Déclarer la variable globale
+let allBoldItems;
+
+// 2️⃣ Créer la fonction pour récupérer les éléments <strong>
+function getBoldItems() {
+    // Sélectionner tous les <strong> dans le paragraphe
+    const paragraph = document.getElementById("myParagraph");
+    allBoldItems = paragraph.getElementsByTagName("strong");
+}
+
+// 3️⃣ Fonction pour mettre les textes en bleu
+function highlight() {
+    for (let i = 0; i < allBoldItems.length; i++) {
+        allBoldItems[i].style.color = "blue";
+    }
+}
+
+// 4️⃣ Fonction pour revenir au noir
+function returnItemsToDefault() {
+    for (let i = 0; i < allBoldItems.length; i++) {
+        allBoldItems[i].style.color = "black";
+    }
+}
+
+// 5️⃣ Ajouter les événements mouseover et mouseout
+const paragraph = document.getElementById("myParagraph");
+
+// Récupérer les éléments <strong> avant d'ajouter les événements
+getBoldItems();
+
+paragraph.addEventListener("mouseover", highlight);
+paragraph.addEventListener("mouseout", returnItemsToDefault);
+
+// exercise 4
+// Sélectionner le formulaire
+const formm = document.getElementById("MyForm");
+
+// Ajouter un événement au moment de la soumission
+formm.addEventListener("submit", function(event) {
+    event.preventDefault(); // Empêche le mulaire de se recharger
+
+    // Récupérer la valeur du rayon
+    const radius = parseFloat(document.getElementById("radius").value);
+
+    if (isNaN(radius) || radius <= 0) {
+        alert("Please enter a valid positive number for the radius.");
+        return;
+    }
+
+    // Calculer le volume de la sphère
+    const volume = (4 / 3) * Math.PI * Math.pow(radius, 3);
+
+    // Afficher le résultat dans le champ volume (arrondi à 2 décimales)
+    document.getElementById("volume").value = volume.toFixed(2);
+});
+  </script>
+</body>
+</html>

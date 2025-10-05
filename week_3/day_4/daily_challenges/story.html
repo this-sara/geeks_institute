@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8" />
+  <title>Challenge: Mad Libs</title>
+ </head>
+ <body>
+
+    <h1>Mad Libs</h1>
+
+    <form id="libform">
+        <label for="noun">Noun:</label><input type="text" id="noun"><br>
+        <label for="adjective">Adjective:</label><input type="text" id="adjective"><br>
+        <label for="person">Someone's Name:</label><input type="text" id="person"><br>
+        <label for="verb">Verb:</label><input type="text" id="verb"><br>
+        <label for="place">A place:</label><input type="text" id="place"><br>
+        <button id="lib-button">Lib it!</button>
+    </form>
+
+    <p>Generated story: 
+    <span id="story"></span>
+    </p>
+
+    <script>
+        // 1️⃣ Récupérer les éléments HTML
+const form = document.getElementById("libform");
+const storySpan = document.getElementById("story");
+
+const nounInput = document.getElementById("noun");
+const adjectiveInput = document.getElementById("adjective");
+const personInput = document.getElementById("person");
+const verbInput = document.getElementById("verb");
+const placeInput = document.getElementById("place");
+
+const shuffleButton = document.getElementById("shuffle-button");
+
+// 2️⃣ Définir les histoires possibles (fonctions pour utiliser les valeurs actuelles)
+const stories = [
+    () => `Once upon a time, ${personInput.value} went to ${placeInput.value} with a ${adjectiveInput.value} ${nounInput.value} to ${verbInput.value}.`,
+    () => `${personInput.value} saw a ${nounInput.value} that was very ${adjectiveInput.value} while ${verbInput.value} in ${placeInput.value}.`,
+    () => `In ${placeInput.value}, ${personInput.value} found a ${adjectiveInput.value} ${nounInput.value} and decided to ${verbInput.value}.`,
+];
+
+// 3️⃣ Fonction pour générer la story
+function generateStory(event) {
+    event.preventDefault(); // Empêche le formulaire de recharger la page
+
+    // Vérifier que tous les champs sont remplis
+    if (!nounInput.value || !adjectiveInput.value || !personInput.value || !verbInput.value || !placeInput.value) {
+        alert("Please fill in all fields!");
+        return;
+    }
+
+    // Choisir une histoire au hasard
+    const randomIndex = Math.floor(Math.random() * stories.length);
+    storySpan.textContent = stories[randomIndex](); // Appel de la fonction histoire
+}
+
+// 4️⃣ Ajouter événement au formulaire
+form.addEventListener("submit", generateStory);
+
+// 5️⃣ Bouton Shuffle pour changer l'histoire
+shuffleButton.addEventListener("click", function() {
+    // Vérifier que tous les champs sont remplis
+    if (!nounInput.value || !adjectiveInput.value || !personInput.value || !verbInput.value || !placeInput.value) {
+        alert("Please fill in all fields!");
+        return;
+    }
+
+    // Choisir une histoire aléatoire
+    const randomIndex = Math.floor(Math.random() * stories.length);
+    storySpan.textContent = stories[randomIndex](); // Affiche nouvelle story
+});
+
+    </script>
+
+ </body>
+</html>
