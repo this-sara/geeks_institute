@@ -60,14 +60,9 @@
         return str.trim().length === 0;
         }
         // Tests
-        console.log(isBlank(''));      // true → chaîne vide
-        console.log(isBlank('abc'));   // false → contient du texte
-        console.log(isBlank('   '));   // true → seulement des espaces
-        function nouhaila(str) {
-            return str.trim()==="";
-        }
-        console.log(nouhaila(''));      // true → chaîne vide
-        console.log(nouhaila('abc'));   // false
+        console.log(isBlank(''));      
+        console.log(isBlank('abc'));   
+        console.log(isBlank('   '));   
 
         // Exercise 2 : Abbrev_name
         function abbrevName(fullName) {
@@ -83,11 +78,7 @@
         // Exercise 3 : SwapCase
         function swapCase(str) {
             let result = '';
-
-            // Parcourir chaque caractère
             for (let char of str) {
-                // Si c’est une majuscule → on la met en minuscule
-                // sinon → en majuscule
                 if (char === char.toUpperCase()) {
                 result += char.toLowerCase();
                 } else {
@@ -99,7 +90,6 @@
             }
         // exercise 4:
         function isOmnipresent(arr, value) {
-        // La méthode every() vérifie si la condition est vraie pour tous les éléments
         return arr.every(subArray => subArray.includes(value));
         }
 

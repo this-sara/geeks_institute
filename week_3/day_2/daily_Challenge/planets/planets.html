@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Challenge: Create a solar system</title>
+        <style>
+            body {
+                background-color: black;
+                padding: 10px;
+            }
+            .planet {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                text-align: center;
+                padding: 10px;
+                position: relative;
+                border: 2px solid white;
+            }
+            .moon {
+                position: absolute;
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                background: rgb(237, 237, 237);
+                border: 5px solid red;
+            }
+            .listPlanets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
+        </style>
+    </head>
+    <body>
+
+    <section class="listPlanets"></section>
+
+    <script>
+    // Select the <section> container
+        const section = document.querySelector('.listPlanets');
+
+        // Array of planets with colors and number of moons
+        const planets = [
+        { name: "Mercury", color: "gray", moons: 0 },
+        { name: "Venus", color: "orange", moons: 0 },
+        { name: "Earth", color: "blue", moons: 1 },
+        { name: "Mars", color: "red", moons: 2 },
+        { name: "Jupiter", color: "brown", moons: 79 },
+        { name: "Saturn", color: "goldenrod", moons: 83 },
+        { name: "Uranus", color: "lightblue", moons: 27 },
+        { name: "Neptune", color: "darkblue", moons: 14 }
+        ];
+
+        // Create each planet
+        planets.forEach(planet => {
+        // Create planet div
+        const planetDiv = document.createElement('div');
+        planetDiv.classList.add('planet');
+        planetDiv.style.backgroundColor = planet.color;
+        planetDiv.textContent = planet.name;
+        planetDiv.style.color = 'white';
+        planetDiv.style.display = 'flex';
+        planetDiv.style.justifyContent = 'center';
+        planetDiv.style.alignItems = 'center';
+        planetDiv.style.margin = '20px';
+        
+        // Create moons
+        // Create moons in circular orbit
+for (let i = 0; i < planet.moons; i++) {
+  const moon = document.createElement('div');
+  moon.classList.add('moon');
+
+  // Calculate circular position
+  const angle = (i / planet.moons) * 2 * Math.PI;
+  const radius = 70; // distance from planet center
+
+  // Use sin/cos to position moons around the planet
+  moon.style.top = `${50 + Math.sin(angle) * radius}px`;
+  moon.style.left = `${50 + Math.cos(angle) * radius}px`;
+
+  planetDiv.appendChild(moon);
+}
+
+
+        // Add planet to the section
+        section.appendChild(planetDiv);
+        });
+    </script>
+    </body>
+</html>
