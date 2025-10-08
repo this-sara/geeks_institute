@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Coloring Squares</title>
+	<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+	<div class="app">
+		<aside class="toolbar">
+			<button id="clear" class="clear">Clear</button>
+			<h2 class="section-title">Select a color</h2>
+			<div id="palette" class="palette" aria-label="Color palette"></div>
+		</aside>
+		<main class="canvas-area">
+			<h2 class="visually-hidden">Draw what you want</h2>
+			<div id="grid" class="grid" role="grid" aria-label="Drawing grid"></div>
+		</main>
+	</div>
+
+	<script src="script.js"></script>
+</body>
+</html>
