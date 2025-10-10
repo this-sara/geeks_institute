@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+        function mergeWords(string) {
+        return function(nextString) {
+        if (nextString === undefined) {
+          return string;
+        } else {
+          return mergeWords(string + ' ' + nextString);
+        }}}
+        console.log(mergeWords('There')('is')('no')('spoon.')()); 
+        
+        const mergeWords = (string) => 
+            (nextString) => nextString === undefined 
+            ? string 
+            : mergeWords(`${string} ${nextString}`);
+  </script>
+</body>
+</html>
+
+
+
