@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RoboFriends</title>
+
+  <style>
+    
+    @import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+
+    
+    body {
+      font-family: 'Audiowide', sans-serif; 
+      background-image: url('circuit-pattern.png');
+      background-size: cover;                  
+      background-attachment: fixed;           
+      color: white;                           
+      text-align: center;                     
+      padding: 20px;                          
+      margin: 0px 300px;                      
+      background-color: blueviolet;            
+    }
+
+    
+    h1 {
+      font-size: 40px;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    }
+
+   
+    input {
+      padding: 12px;
+      width: 300px;
+      font-size: 18px;
+      border-radius: 25px;
+      border: none;
+      outline: none;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3); 
+      margin-bottom: 20px;                     
+    }
+
+   
+    .cards-container {
+      display: flex;        
+      flex-wrap: wrap;      /* Permet aux cartes de passer à la ligne si nécessaire */
+      justify-content: center; /* Centrer horizontalement les cartes */
+      gap: 20px;            /* Espacement entre les cartes */
+    }
+
+    /* --- Style des cartes --- */
+    .card {
+      background-image: url('card-pattern.png'); /* Image de fond spécifique à la carte */
+      background-size: cover;                    /* L'image couvre toute la carte */
+      background-position: center;               /* Centrer l'image */
+      padding: 100px;                            /* Padding interne de la carte */
+      width: 200px;                              /* Largeur fixe */
+      border-radius: 20px;                       /* Coins arrondis */
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);   /* Ombre pour effet 3D */
+      color: black;                              /* Couleur du texte (ici noir) */
+      text-shadow: 0 2px 4px rgba(0,0,0,0.6);   /* Ombre sur le texte */
+      background-color: darkcyan;                /* Couleur de secours si image non chargée */
+    }
+
+    /* --- Style des images à l'intérieur des cartes --- */
+    .card img {
+      width: 100%;         /* Image prend toute la largeur de la carte */
+      border-radius: 10px; /* Coins arrondis pour l'image */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- --- Titre principal --- -->
+  <h1>RoboFriends 🤖</h1>
+
+  <!-- --- Champ de recherche --- -->
+  <input type="text" id="search" placeholder="Search robots..." />
+
+  <!-- --- Container pour toutes les cartes --- -->
+  <div class="cards-container" id="cardsContainer">
+    <!-- Les cartes seront générées en JavaScript -->
+  </div>
+
+  <script>
+    // 🌟 Tableau des robots avec id, nom, email et image
+    const robots = [
+      { id: 1, name: 'Leanne Graham', email: 'Sincere@april.biz', image: 'https://robohash.org/1?200x200' },
+      { id: 2, name: 'Ervin Howell', email: 'Shanna@melissa.tv', image: 'https://robohash.org/2?200x200' },
+      { id: 3, name: 'Clementine Bauch', email: 'Nathan@yesenia.net', image: 'https://robohash.org/3?200x200' },
+      { id: 4, name: 'Patricia Lebsack', email: 'Julianne.OConner@kory.org', image: 'https://robohash.org/4?200x200' },
+      { id: 5, name: 'Chelsey Dietrich', email: 'Lucio_Hettinger@annie.ca', image: 'https://robohash.org/5?200x200' },
+      { id: 6, name: 'Mrs. Dennis Schulist', email: 'Karley_Dach@jasper.info', image: 'https://robohash.org/6?200x200' },
+      { id: 7, name: 'Kurtis Weissnat', email: 'Telly.Hoeger@billy.biz', image: 'https://robohash.org/7?200x200' },
+      { id: 8, name: 'Nicholas Runolfsdottir V', email: 'Sherwood@rosamond.me', image: 'https://robohash.org/8?200x200' },
+      { id: 9, name: 'Glenna Reichert', email: 'Chaim_McDermott@dana.io', image: 'https://robohash.org/9?200x200' },
+      { id: 10, name: 'Clementina DuBuque', email: 'Rey.Padberg@karina.biz', image: 'https://robohash.org/10?200x200' }
+    ];
+
+    // 🌟 Fonction pour afficher les cartes
+    function displayRobots(list) {
+      const container = document.getElementById("cardsContainer");
+      container.innerHTML = ""; // Vider le container avant de recréer les cartes
+
+      // Pour chaque robot dans la liste
+      list.forEach(robot => {
+        const card = document.createElement("div"); // Crée un div pour la carte
+        card.classList.add("card");                 // Ajoute la classe "card" pour le style
+
+        // Remplit la carte avec image, nom et email
+        card.innerHTML = `
+          <img src="${robot.image}" alt="${robot.name}" />
+          <h3>${robot.name}</h3>
+          <p>${robot.email}</p>
+        `;
+
+        // Ajoute la carte au container
+        container.appendChild(card);
+      });
+    }
+
+    // Affiche toutes les cartes au chargement
+    displayRobots(robots);
+
+    // 🌟 Filtre dynamique en temps réel pour la recherche
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchInput = document.querySelector('input'); // Sélectionne le champ de recherche
+      const cards = document.querySelectorAll('.card');    // Sélectionne toutes les cartes existantes
+
+      // Écoute chaque frappe dans le champ
+      searchInput.addEventListener('input', () => {
+        const query = searchInput.value.toLowerCase(); // Texte en minuscules pour insensible à la casse
+
+        // Parcourt toutes les cartes
+        cards.forEach(card => {
+          const cardText = card.textContent.toLowerCase(); // Texte de la carte en minuscules
+          if(cardText.includes(query)) {
+            card.style.display = 'block'; // Affiche la carte si correspond
+          } else {
+            card.style.display = 'none';  // Cache la carte sinon
+          }
+        });
+      });
+    });
+
+  </script>
+
+</body>
+</html>

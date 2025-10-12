@@ -1,0 +1,57 @@
+<!-- **************************************************************
+ 🌟 Exercise 1 : HTML Form #3
+************************************************************** -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Form Exercise</title>
+</head>
+<body>
+
+<h2>Fill the Form</h2>
+<form id="userForm" action="display.html" method="GET">
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" required><br><br>
+
+  <label for="lastname">Last Name:</label>
+  <input type="text" id="lastname" name="lastname" required><br><br>
+
+  <input type="submit" value="Send">
+</form>
+
+</body>
+</html>
+
+<!-- display.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Form Data Display</title>
+</head>
+<body>
+
+<h2>Form Data</h2>
+<section id="result"></section>
+
+<script>
+  //  Extract URL parameters using URLSearchParams
+  const params = new URLSearchParams(window.location.search);
+  const name = params.get('name');
+  const lastname = params.get('lastname');
+
+  //  Select the section and display the data
+  const section = document.getElementById('result');
+  section.textContent = `Name: ${name}, Lastname: ${lastname}`;
+
+  //  Explanation:
+  //   - Form uses GET method, so data is sent in the URL query string
+  //   - display.html reads URL params using URLSearchParams
+  //   - DOM manipulation displays the values in <section> tag
+</script>
+
+</body>
+</html>

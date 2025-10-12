@@ -1,0 +1,53 @@
+<!-- **************************************************************
+ 🌟 Exercise: Form Data as JSON
+************************************************************** -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Form to JSON</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; }
+  section { margin-top: 20px; font-size: 1.2em; }
+</style>
+</head>
+<body>
+
+<h2>Enter your information</h2>
+
+<form id="userForm">
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" required><br><br>
+
+  <label for="lastname">Last Name:</label>
+  <input type="text" id="lastname" name="lastname" required><br><br>
+
+  <input type="submit" value="Send">
+</form>
+
+<section id="result"></section>
+
+<script>
+  // Select the form and section
+  const form = document.getElementById("userForm");
+  const resultSection = document.getElementById("result");
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault(); // Prevent page reload on submit
+
+    // Retrieve input values
+    const name = document.getElementById("name").value;
+    const lastname = document.getElementById("lastname").value;
+
+    // Create a JSON object
+    const userData = { name, lastname };
+
+    // Convert to JSON string and display in the DOM
+    resultSection.textContent = JSON.stringify(userData, null, 2);
+
+  });
+</script>
+
+</body>
+</html>
