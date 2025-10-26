@@ -1,0 +1,43 @@
+# =========================================
+# Blog API Test
+# =========================================
+
+# GET all posts
+GET http://localhost:3000/posts
+Accept: application/json
+
+###
+
+# GET a post by ID
+GET http://localhost:3000/posts/1
+Accept: application/json
+
+###
+
+# POST create a new post
+POST http://localhost:3000/posts
+Content-Type: application/json
+
+{
+  "title": "Test Post",
+  "content": "Hello world!"
+}
+
+###
+
+# PUT update a post
+PUT http://localhost:3000/posts/1
+Content-Type: application/json
+
+{
+  "title": "Updated Title",
+  "content": "Updated content!"
+}
+
+###
+
+# DELETE a post
+DELETE http://localhost:3000/posts/1
+Accept: application/json
+
+###
