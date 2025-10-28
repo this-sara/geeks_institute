@@ -1,0 +1,52 @@
+### 🔑 Login admin (stocker token)
+# @name login
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "admin@example.com",
+    "password": "Admin123!"
+}
+
+###
+
+### 1️⃣ Créer un projet (admin required)
+POST http://localhost:5000/api/project
+Authorization: Bearer {{login.response.body.token}}
+Content-Type: application/json
+
+{
+  "name": "Mon super projet",
+  "description": "Description du projet"
+}
+
+###
+
+### 2️⃣ Récupérer tous les projets
+# @name getProjects
+GET http://localhost:5000/api/project
+Authorization: Bearer {{login.response.body.token}}
+
+###
+
+### 3️⃣ Récupérer un projet par ID
+GET http://localhost:5000/api/project/{{project_id}}
+Authorization: Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MDEyNzM4Nzk1NGMwY2RhZDIxYmJiNiIsInJvbGUiOiJtZW1iZXIiLCJpYXQiOjE3NjE2ODUxNTMsImV4cCI6MTc2MTc3MTU1M30.1zKOXt9HMEF40qHwzwUThvHg58hqN9-jafsvZ-ER28E"
+
+###
+
+### 4️⃣ Mettre à jour un projet (admin only)
+PUT http://localhost:5000/api/project/{{project_id}}
+Authorization: Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MDEyNzM4Nzk1NGMwY2RhZDIxYmJiNiIsInJvbGUiOiJtZW1iZXIiLCJpYXQiOjE3NjE2ODUxNTMsImV4cCI6MTc2MTc3MTU1M30.1zKOXt9HMEF40qHwzwUThvHg58hqN9-jafsvZ-ER28E"
+Content-Type: application/json
+
+{
+  "name": "Projet mis à jour",
+  "description": "Nouvelle description"
+}
+
+###
+
+### 5️⃣ Supprimer un projet (admin only)
+DELETE http://localhost:5000/api/project/{{project_id}}
+Authorization: Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MDEyNzM4Nzk1NGMwY2RhZDIxYmJiNiIsInJvbGUiOiJtZW1iZXIiLCJpYXQiOjE3NjE2ODUxNTMsImV4cCI6MTc2MTc3MTU1M30.1zKOXt9HMEF40qHwzwUThvHg58hqN9-jafsvZ-ER28E"

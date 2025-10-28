@@ -1,0 +1,42 @@
+### Test 1 — Créer un nouvel utilisateur (REGISTER)
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "sora@example.com",
+  "password": "123457"
+}
+
+###
+
+### Test 2 — Connexion de l’utilisateur (LOGIN)
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "sora@example.com",
+  "password": "123457"
+}
+###
+### Test 3 — Connexion admin (LOGIN)
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "admin@example.com",
+  "password": "admin123",
+  "role": "admin"
+}
+###
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@example.com",
+  "password": "admin123",
+  "role": "admin"
+}
+###
+
+# GET http://localhost:5000/api/projects
+# Authorization: Bearer {{token}}
