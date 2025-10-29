@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Currency Converter</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen flex items-center justify-center bg-gray-100">
+
+  <div class="bg-white shadow-lg rounded-xl p-8 w-[90%] max-w-md">
+    <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">💱 Currency Converter</h1>
+
+   
+    <div class="mb-4">
+      <label class="block text-gray-700 mb-2 font-semibold">From:</label>
+      <select id="from" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-400"></select>
+    </div>
+
+   
+    <div class="mb-4">
+      <label class="block text-gray-700 mb-2 font-semibold">To:</label>
+      <select id="to" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-400"></select>
+    </div>
+
+    <!-- Amount -->
+    <div class="mb-4">
+      <label class="block text-gray-700 mb-2 font-semibold">Amount:</label>
+      <input type="number" id="amount" value="1" 
+             class="w-full border border-gray-300 rounded-lg p-2 text-center focus:ring-2 focus:ring-blue-400" />
+    </div>
+
+    <!-- Buttons -->
+    <div class="flex justify-between items-center mb-4">
+      <button id="convert" 
+              class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
+        Convert
+      </button>
+      <button id="switch" 
+              class="bg-gray-200 px-3 py-2 rounded-lg hover:bg-gray-300 transition">
+        🔁 Switch
+      </button>
+    </div>
+
+    <!-- Result -->
+    <div id="result" class="text-center text-lg font-semibold text-gray-800"></div>
+  </div>
+
+  <script>
+    const apiKey = "b8dff61238b585a931af7e98";
+    const fromSelect = document.getElementById("from");
+    const toSelect = document.getElementById("to");
+    const resultDiv = document.getElementById("result");
+    const amountInput = document.getElementById("amount");
+
+    
+    async function loadCurrencies() {
+      try {
+        const res = await fetch(`https://v6.exchangerate-api.com/v6/${apiKey}/codes`);
+        const data = await res.json();
+
+        data.supported_codes.forEach(code => {
+          const option1 = document.createElement("option");
+          const option2 = document.createElement("option");
+          option1.value = option2.value = code[0];
+          option1.textContent = option2.textContent = `${code[0]} - ${code[1]}`;
+          fromSelect.appendChild(option1);
+          toSelect.appendChild(option2);
+        });
+
+        fromSelect.value = "USD";
+        toSelect.value = "MAD";
+      } catch (err) {
+        resultDiv.textContent = "Error loading currencies 😢";
+      }
+    }
+
+    
+    async function convertCurrency() {
+      const from = fromSelect.value;
+      const to = toSelect.value;
+      const amount = amountInput.value;
+
+      if (!amount || amount <= 0) {
+        resultDiv.textContent = "Enter a valid amount.";
+        return;
+      }
+
+      try {
+        const res = await fetch(`https://v6.exchangerate-api.com/v6/${apiKey}/pair/${from}/${to}/${amount}`);
+        const data = await res.json();
+
+        if (data.result === "error") {
+          resultDiv.textContent = "Error fetching conversion.";
+          return;
+        }
+
+        resultDiv.textContent = `${amount} ${from} = ${data.conversion_result.toFixed(2)} ${to}`;
+      } catch (err) {
+        resultDiv.textContent = "Network error 😔";
+      }
+    }
+
+   
+    function switchCurrencies() {
+      const temp = fromSelect.value;
+      fromSelect.value = toSelect.value;
+      toSelect.value = temp;
+      resultDiv.textContent = "";
+    }
+
+    document.getElementById("convert").addEventListener("click", convertCurrency);
+    document.getElementById("switch").addEventListener("click", switchCurrencies);
+
+    loadCurrencies();
+  </script>
+</body>
+</html>
