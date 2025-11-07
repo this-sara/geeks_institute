@@ -43,6 +43,17 @@
             "database": "db_restaurant",
             "username": "postgres",
             "password": "sara"
+        },
+        {
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "blog_db",
+            "username": "postgres",
+            "password": "sara",
+            "database": "blog_db"
         }
     ]
 }

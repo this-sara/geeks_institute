@@ -1,0 +1,114 @@
+### 🟢 Get all posts
+GET http://localhost:3000/posts
+Content-Type: application/json
+
+###
+
+### 🟢 Get a single post by ID
+GET http://localhost:3000/posts/1
+Content-Type: application/json
+
+###
+
+### 🟡 Create a new post
+POST http://localhost:3000/posts
+Content-Type: application/json
+
+{
+  "title": "My first blog post 📝",
+  "content": "This is a test post created via REST Client."
+}
+
+###
+
+### 🟠 Update an existing post
+PUT http://localhost:3000/posts/1
+Content-Type: application/json
+
+{
+  "title": "Updated title ✏️",
+  "content": "This content has been updated successfully."
+}
+
+###
+
+### 🔴 Delete a post
+DELETE http://localhost:3000/posts/1
+Content-Type: application/json
+
+### Get all books
+GET http://localhost:5000/api/books
+Accept: application/json
+
+###
+
+# Get a book by id (change the id si nécessaire)
+GET http://localhost:5000/api/books/1
+Accept: application/json
+
+###
+
+# Create a new book (POST)
+POST http://localhost:5000/api/books
+Content-Type: application/json
+
+{
+  "title": "Clean Code",
+  "author": "Robert C. Martin",
+  "publishedYear": 2008
+}
+
+###
+
+# Create another book (to test unique content)
+POST http://localhost:5000/api/books
+Content-Type: application/json
+
+{
+  "title": "The Pragmatic Programmer",
+  "author": "Andrew Hunt & David Thomas",
+  "publishedYear": 1999
+}
+
+###
+
+# Update a book completely (PUT) — remplace 1 par l'id réel
+PUT http://localhost:5000/api/books/1
+Content-Type: application/json
+
+{
+  "title": "Clean Code (Revised)",
+  "author": "Robert C. Martin",
+  "publishedYear": 2008
+}
+
+###
+
+# Partial update (PATCH) si ton API le supporte — remplace l'id si besoin
+PATCH http://localhost:5000/api/books/1
+Content-Type: application/json
+
+{
+  "publishedYear": 2009
+}
+
+###
+
+# Delete a book (DELETE) — remplace 2 par l'id que tu veux supprimer
+DELETE http://localhost:5000/api/books/2
+
+###
+
+# Test: Get non-existing book to check 404 handling
+GET http://localhost:5000/api/books/9999
+Accept: application/json
+
+###
+
+# Bad POST (missing required fields) to check 400 handling
+POST http://localhost:5000/api/books
+Content-Type: application/json
+
+{
+  "title": ""
+}
